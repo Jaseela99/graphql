@@ -5,7 +5,11 @@ const resolvers = {
     users: () => {
       return UserList;
     },
-    User: (parent, args) => {
+    User: (parent, args, context, info) => {
+      /* query-->user-->name  so when we are accessing name user will be its parent level */
+      console.log(parent);
+      /* context is used to pass token for authentication and authorization context can take in req with headers which has the token */
+      console.log(context);
       const id = args.id;
       const user = _.find(UserList, { id: Number(id) });
       return user;
